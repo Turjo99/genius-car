@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
+import { AuthContext } from "../Context/UserContext";
 const Header = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div>
       <div className="navbar pt-6 pb-6">
@@ -30,13 +32,6 @@ const Header = () => {
               <li>
                 <Link to="/">Home</Link>
               </li>
-
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-              <li>
-                <Link to="/signup">SignUp</Link>
-              </li>
             </ul>
           </div>
           <a className="btn btn-ghost normal-case text-xl ">
@@ -48,13 +43,22 @@ const Header = () => {
             <li>
               <Link to="/">Home</Link>
             </li>
-
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup">SignUp</Link>
-            </li>
+            {user?.email ? (
+              <>
+                <li>
+                  <Link to="/orders">orders</Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+                <li>
+                  <Link to="/signup">SignUp</Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
         <div className="navbar-end">
